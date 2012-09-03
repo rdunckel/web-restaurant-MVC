@@ -1,0 +1,19 @@
+/* 
+    Document   : menu
+    Created on : Sep 3, 2012, 5:57:29 PM
+    Author     : Tivoli
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.itemLabel {
+    font-weight: bold;
+}
+
+.menuItem {
+    padding: 20px;
+}
+
+.timestamp {
+    font-style: italic;
+}
