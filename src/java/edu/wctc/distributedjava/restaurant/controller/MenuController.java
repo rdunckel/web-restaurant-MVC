@@ -34,7 +34,7 @@ public class MenuController extends HttpServlet {
             throws ServletException, IOException {
 
         MenuService menu = new MenuService();
-            
+                    
         request.setAttribute("entrees", menu.getEntrees());
         request.setAttribute("beverages", menu.getBeverages());
         request.setAttribute("desserts", menu.getDesserts());
