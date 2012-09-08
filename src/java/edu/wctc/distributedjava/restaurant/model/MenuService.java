@@ -12,24 +12,21 @@ import java.util.List;
  */
 public class MenuService {
 
-    private List<String> entrees;
-    private List<String> beverages;
-    private List<String> desserts;
     private MenuDao menuDao;
 
     public MenuService() {
         menuDao = new MenuDao();
     }
 
-    public List<String> getEntrees() {
-        return menuDao.obtainEntrees();
+    public List<MenuItem> getEntrees() {
+        return menuDao.getEntrees();
     }
 
-    public List<String> getBeverages() {
-        return menuDao.obtainBeverages();
+    public List<MenuItem> getBeverages() {
+        return menuDao.getBeverages();
     }
 
-    public List<String> getDesserts() {
-        return menuDao.obtainDesserts();
+    public List<MenuItem> getDesserts() {
+        return menuDao.getDesserts();
     }
 }

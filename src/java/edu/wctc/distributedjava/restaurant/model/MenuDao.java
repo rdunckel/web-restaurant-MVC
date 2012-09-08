@@ -24,32 +24,59 @@ public class MenuDao {
     private String userName;
     private String password;
 
-    public List<String> obtainEntrees() {
-        List<String> entrees = new ArrayList<String>();
+    public List<MenuItem> getEntrees() {
 
-        entrees.add("Steak");
-        entrees.add("Lobster");
-        entrees.add("Chicken");
+        List<MenuItem> entrees = new ArrayList<MenuItem>();
+        MenuItem item = null;
+
+        List<String> tempNames = new ArrayList<String>();
+        tempNames.add("Steak");
+        tempNames.add("Lobster");
+        tempNames.add("Chicken");
+
+        for (String name : tempNames) {
+            item = new MenuItem();
+            item.setItemName(name);
+            entrees.add(item);
+        }
 
         return entrees;
     }
 
-    public List<String> obtainBeverages() {
-        List<String> beverages = new ArrayList<String>();
+    public List<MenuItem> getBeverages() {
 
-        beverages.add("Water");
-        beverages.add("Martini");
-        beverages.add("Wine");
+        List<MenuItem> beverages = new ArrayList<MenuItem>();
+        MenuItem item = null;
+
+        List<String> tempNames = new ArrayList<String>();
+        tempNames.add("Water");
+        tempNames.add("Martini");
+        tempNames.add("Wine");
+
+        for (String name : tempNames) {
+            item = new MenuItem();
+            item.setItemName(name);
+            beverages.add(item);
+        }
 
         return beverages;
     }
 
-    public List<String> obtainDesserts() {
-        List<String> desserts = new ArrayList<String>();
+    public List<MenuItem> getDesserts() {
 
-        desserts.add("Creme Brulee");
-        desserts.add("Chocolate Cake");
-        desserts.add("Bananas Foster");
+        List<MenuItem> desserts = new ArrayList<MenuItem>();
+        MenuItem item = null;
+
+        List<String> tempNames = new ArrayList<String>();
+        tempNames.add("Creme Brulee");
+        tempNames.add("Chocolate Cake");
+        tempNames.add("Bananas Foster");
+
+        for (String name : tempNames) {
+            item = new MenuItem();
+            item.setItemName(name);
+            desserts.add(item);
+        }
 
         return desserts;
     }
