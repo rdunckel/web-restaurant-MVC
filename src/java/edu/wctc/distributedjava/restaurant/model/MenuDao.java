@@ -36,7 +36,7 @@ public class MenuDao {
 
         for (String name : tempNames) {
             item = new MenuItem();
-            item.setItemName(name);
+            item.setName(name);
             entrees.add(item);
         }
 
@@ -55,7 +55,7 @@ public class MenuDao {
 
         for (String name : tempNames) {
             item = new MenuItem();
-            item.setItemName(name);
+            item.setName(name);
             beverages.add(item);
         }
 
@@ -74,7 +74,7 @@ public class MenuDao {
 
         for (String name : tempNames) {
             item = new MenuItem();
-            item.setItemName(name);
+            item.setName(name);
             desserts.add(item);
         }
 

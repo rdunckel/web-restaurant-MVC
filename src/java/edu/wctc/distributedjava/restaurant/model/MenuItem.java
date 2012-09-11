@@ -10,19 +10,19 @@ package edu.wctc.distributedjava.restaurant.model;
  */
 public class MenuItem {
 
-    private String itemName;
+    private String name;
 
     /**
      * @return the itemName
      */
-    public String getItemName() {
-        return itemName;
+    public String getName() {
+        return name;
     }
 
     /**
      * @param itemName the itemName to set
      */
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setName(String itemName) {
+        this.name = itemName;
     }
 }

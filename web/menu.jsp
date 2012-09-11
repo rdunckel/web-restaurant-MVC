@@ -30,7 +30,7 @@
                     <td>
                         <select name="entree">
                             <c:forEach var="entree" items="${entrees}">
-                                <option value="${entree.itemName}">${entree.itemName}</option>
+                                <option value="${entree.name}">${entree.name}</option>
                             </c:forEach>
                         </select>
                     </td>
@@ -40,7 +40,7 @@
                     <td>
                         <select name="beverage">
                             <c:forEach var="beverage" items="${beverages}">
-                                <option value="${beverage.itemName}">${beverage.itemName}</option>
+                                <option value="${beverage.name}">${beverage.name}</option>
                             </c:forEach>
                         </select>
                     </td>
@@ -50,7 +50,7 @@
                     <td>
                         <select name="dessert">
                             <c:forEach var="dessert" items="${desserts}">
-                                <option value="${dessert.itemName}">${dessert.itemName}</option>
+                                <option value="${dessert.name}">${dessert.name}</option>
                             </c:forEach>
                         </select>
                     </td>
