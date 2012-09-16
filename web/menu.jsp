@@ -36,6 +36,16 @@
                     </td>
                 </tr>
                 <tr>
+                    <th>Side:</th>
+                    <td>
+                        <select name="entree">
+                            <c:forEach var="side" items="${sides}">
+                                <option value="${side.name}">${side.name}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <th>Beverage:</th>
                     <td>
                         <select name="beverage">

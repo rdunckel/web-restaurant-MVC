@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ConfirmationController extends HttpServlet {
 
     private static final String CONFIRMATION_PAGE = "confirmation.jsp";
-    
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -32,20 +32,20 @@ public class ConfirmationController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
         String name = request.getParameter("name");
         String entree = request.getParameter("entree");
         String beverage = request.getParameter("beverage");
         String dessert = request.getParameter("dessert");
-        
+
         request.setAttribute("name", name);
         request.setAttribute("entree", entree);
         request.setAttribute("beverage", beverage);
         request.setAttribute("dessert", dessert);
-        
+
         RequestDispatcher view = request.getRequestDispatcher(CONFIRMATION_PAGE);
         view.forward(request, response);
-                
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

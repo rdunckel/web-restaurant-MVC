@@ -18,8 +18,12 @@ public class MenuService {
         menuDao = new MenuDao();
     }
 
-    public List<MenuItem> getEntrees() {
+    public List<MenuItem> getEntrees() {       
         return menuDao.getEntrees();
+    }
+    
+    public List<MenuItem> getSides() {       
+        return menuDao.getSides();
     }
 
     public List<MenuItem> getBeverages() {

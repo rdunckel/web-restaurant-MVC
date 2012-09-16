@@ -4,8 +4,10 @@
  */
 package edu.wctc.distributedjava.restaurant.controller;
 
+import edu.wctc.distributedjava.restaurant.model.MenuItem;
 import edu.wctc.distributedjava.restaurant.model.MenuService;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,8 +36,9 @@ public class MenuController extends HttpServlet {
             throws ServletException, IOException {
 
         MenuService menu = new MenuService();
-                    
+
         request.setAttribute("entrees", menu.getEntrees());
+        request.setAttribute("sides", menu.getSides());
         request.setAttribute("beverages", menu.getBeverages());
         request.setAttribute("desserts", menu.getDesserts());
 
