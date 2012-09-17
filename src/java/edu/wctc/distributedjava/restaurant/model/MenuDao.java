@@ -4,13 +4,16 @@
  */
 package edu.wctc.distributedjava.restaurant.model;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,10 +24,6 @@ import java.util.logging.Logger;
 public class MenuDao {
 
     private Connection conn;
-    private static final String URL = "jdbc:mysql://localhost:3306/wctc_distributed_java";
-    private static final String USER_NAME = "root";
-    private static final String PASSWORD = "admin";
-    private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
     public static void main(String[] args) {
 
@@ -33,7 +32,7 @@ public class MenuDao {
 
         List<MenuItem> entrees = menu.getBeverages();
         lists.add(entrees);
-        
+
         List<MenuItem> sides = menu.getSides();
         lists.add(sides);
 
@@ -46,6 +45,8 @@ public class MenuDao {
         for (List<MenuItem> list : lists) {
             for (MenuItem item : list) {
                 System.out.println(item.getName());
+                System.out.println(item.getPrice());
+                System.out.println(item.getDescription());
             }
         }
     }
@@ -57,7 +58,7 @@ public class MenuDao {
 
         return entrees;
     }
-    
+
     public List<MenuItem> getSides() {
 
         String dbTable = "side";
@@ -87,32 +88,50 @@ public class MenuDao {
         List<MenuItem> items = new ArrayList<MenuItem>();
         MenuItem item = null;
 
+        InputStream inStream = null;
+        Properties dbProps = new Properties();
         try {
-            Class.forName(DRIVER_CLASS_NAME);
-            conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
+            inStream = MenuDao.class.getResourceAsStream("db.properties");
+            dbProps.load(inStream);
+        } catch (IOException ex) {
+            Logger.getLogger(MenuDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                inStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MenuDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        String driverClassName = dbProps.getProperty("DRIVER_CLASS_NAME");
+        String url = dbProps.getProperty("URL");
+        String userName = dbProps.getProperty("USER_NAME");
+        String password = dbProps.getProperty("PASSWORD");
+
+        try {
+            Class.forName(driverClassName);
+            conn = DriverManager.getConnection(url, userName, password);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MenuDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(MenuDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Statement stmt = null;
-        ResultSet rs = null;
         String sql = "SELECT * FROM " + dbTable;
-
-        try {
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        PreparedStatement prepStmt = null;
+        ResultSet rs = null;
 
         int count = 0;
 
         try {
+            prepStmt = conn.prepareStatement(sql);
+
+            rs = prepStmt.executeQuery();
             while (rs.next()) {
                 item = new MenuItem();
                 item.setName(rs.getString(2));
+                item.setPrice(rs.getDouble(3));
+                item.setDescription(rs.getString(4));
                 items.add(item);
                 count++;
             }
@@ -123,7 +142,7 @@ public class MenuDao {
             Logger.getLogger(MenuDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                stmt.close();
+                prepStmt.close();
                 conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(MenuDao.class.getName()).log(Level.SEVERE, null, ex);

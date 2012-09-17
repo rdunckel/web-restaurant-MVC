@@ -4,10 +4,8 @@
  */
 package edu.wctc.distributedjava.restaurant.controller;
 
-import edu.wctc.distributedjava.restaurant.model.MenuItem;
 import edu.wctc.distributedjava.restaurant.model.MenuService;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
