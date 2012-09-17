@@ -34,17 +34,24 @@ public class ConfirmationController extends HttpServlet {
 
         String name = request.getParameter("name");
         String entree = request.getParameter("entree");
+        String side = request.getParameter("side");
         String beverage = request.getParameter("beverage");
         String dessert = request.getParameter("dessert");
-
+        
         request.setAttribute("name", name);
         request.setAttribute("entree", entree);
+        request.setAttribute("side", side);
         request.setAttribute("beverage", beverage);
         request.setAttribute("dessert", dessert);
 
         RequestDispatcher view = request.getRequestDispatcher(CONFIRMATION_PAGE);
         view.forward(request, response);
 
+    }
+    
+    private Double calculateOrderTotal(){
+        
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -26,6 +26,7 @@
 
         <ul>
             <li><span class="itemLabel">Entree:</span><span class="menuItem">${entree}</span></li>
+            <li><span class="itemLabel">Side</span><span class="menuItem">${side}</span></li>
             <li><span class="itemLabel">Beverage:</span><span class="menuItem">${beverage}</span></li>
             <li><span class="itemLabel">Dessert:</span><span class="menuItem">${dessert}</span></li>
         </ul>
