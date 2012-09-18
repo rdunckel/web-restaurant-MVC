@@ -4,8 +4,11 @@
  */
 package edu.wctc.distributedjava.restaurant.controller;
 
+import edu.wctc.distributedjava.restaurant.model.MenuDao;
+import edu.wctc.distributedjava.restaurant.model.MenuDaoMock;
 import edu.wctc.distributedjava.restaurant.model.MenuService;
 import java.io.IOException;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 public class MenuController extends HttpServlet {
 
     private static final String MENU_PAGE = "menu.jsp";
+    
+    @Inject
+    private MenuService menu;
 
     /**
      * Processes requests for both HTTP
@@ -32,8 +38,6 @@ public class MenuController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        MenuService menu = new MenuService();
 
         request.setAttribute("entrees", menu.getEntrees());
         request.setAttribute("sides", menu.getSides());

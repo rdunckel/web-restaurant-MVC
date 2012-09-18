@@ -5,6 +5,7 @@
 package edu.wctc.distributedjava.restaurant.model;
 
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  *
@@ -12,12 +13,13 @@ import java.util.List;
  */
 public class MenuService {
 
+    @Inject
     private MenuDao menuDao;
-
-    public MenuService() {
-        menuDao = new MenuDao();
+    
+    public MenuService(){
+        menuDao = new MenuDaoMock();
     }
-
+    
     public List<MenuItem> getEntrees() {       
         return menuDao.getEntrees();
     }
