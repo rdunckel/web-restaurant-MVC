@@ -20,4 +20,6 @@ public interface MenuDao {
 
     List<MenuItem> getSides();
     
+    double getItemPrice(String itemName);
+    
 }

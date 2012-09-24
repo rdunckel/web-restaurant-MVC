@@ -5,65 +5,65 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ryan's Restaurant</title>
-        <link rel="stylesheet" href="menu.css" />
+        <title>Ryan's Place</title>
+        <link rel="stylesheet" href="resources/default/1_0/css/menu.css" />
     </head>
     <body>
+        <div id="header">
+            <h1>Ryan's Place</h1>
+        </div>
         <div id ="orderDiv">
             <h1>Menu</h1>
 
-            <form name="order" action="Confirmation" method="POST">
+            <form id="order" name="order" action="Confirmation" method="POST">
                 <table>
-                    <tr>
-                        <th>Name:</th>
-                        <td>
-                            <input type="text" name="name" value="Ryan" />            
-                        </td>
-                    </tr>
                     <tr>
                         <th>Entree:</th>
                         <td>
-                            <select name="entree">
-                                <c:forEach var="entree" items="${entrees}">
-                                    <option value="${entree.name}">${entree.name} - ${entree.price}</option>
-                                </c:forEach>
-                            </select>
+                            <c:forEach var="entree" items="${entrees}">
+                                <input type="checkbox" name="entrees" value="${entree.name}">${entree.name} - 
+                                <fmt:formatNumber value="${entree.price}" type="currency" /><br>
+                            </c:forEach>
                         </td>
                     </tr>
                     <tr>
                         <th>Side:</th>
                         <td>
-                            <select name="side">
-                                <c:forEach var="side" items="${sides}">
-                                    <option value="${side.name}">${side.name} - ${side.price}</option>
-                                </c:forEach>
-                            </select>
+                            <c:forEach var="side" items="${sides}">
+                                <input type="checkbox" name="sides" value="${side.name}">${side.name} - 
+                                <fmt:formatNumber value="${side.price}" type="currency" /><br>
+                            </c:forEach>
                         </td>
                     </tr>
                     <tr>
                         <th>Beverage:</th>
                         <td>
-                            <select name="beverage">
-                                <c:forEach var="beverage" items="${beverages}">
-                                    <option value="${beverage.name}">${beverage.name} - ${beverage.price}</option>
-                                </c:forEach>
-                            </select>
+                            <c:forEach var="beverage" items="${beverages}">
+                                <input type="checkbox" name="beverages" value="${beverage.name}">${beverage.name} - 
+                                <fmt:formatNumber value="${beverage.price}" type="currency" /><br>
+                            </c:forEach>
                         </td>
                     </tr>
                     <tr>
                         <th>Dessert:</th>
                         <td>
-                            <select name="dessert">
-                                <c:forEach var="dessert" items="${desserts}">
-                                    <option value="${dessert.name}">${dessert.name} - ${dessert.price}</option>
-                                </c:forEach>
-                            </select>
+                            <c:forEach var="dessert" items="${desserts}">
+                                <input type="checkbox" name="desserts" value="${dessert.name}">${dessert.name} - 
+                                <fmt:formatNumber value="${dessert.price}" type="currency" /><br>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Name:</th>
+                        <td>
+                            <input type="text" name="name" />            
                         </td>
                     </tr>
                     <tr>

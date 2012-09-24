@@ -6,6 +6,7 @@ package edu.wctc.distributedjava.restaurant.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.enterprise.inject.Alternative;
 
 /**
@@ -100,5 +101,12 @@ public class MenuDaoMock implements MenuDao {
 
         return items;
 
+    }
+
+    @Override
+    public double getItemPrice(String itemName) {
+        Random generator = new Random();
+
+        return generator.nextDouble() * 50;
     }
 }

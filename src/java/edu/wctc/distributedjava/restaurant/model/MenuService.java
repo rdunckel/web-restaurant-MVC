@@ -15,16 +15,16 @@ public class MenuService {
 
     @Inject
     private MenuDao menuDao;
-    
-    public MenuService(){
+
+    public MenuService() {
         menuDao = new MenuDaoMock();
     }
-    
-    public List<MenuItem> getEntrees() {       
+
+    public List<MenuItem> getEntrees() {
         return menuDao.getEntrees();
     }
-    
-    public List<MenuItem> getSides() {       
+
+    public List<MenuItem> getSides() {
         return menuDao.getSides();
     }
 
@@ -34,5 +34,9 @@ public class MenuService {
 
     public List<MenuItem> getDesserts() {
         return menuDao.getDesserts();
+    }
+
+    public double getItemPrice(String itemName) {
+        return menuDao.getItemPrice(itemName);
     }
 }

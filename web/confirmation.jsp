@@ -18,20 +18,66 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Order Confirmation</title>
-        <link rel="stylesheet" href="menu.css" />
+        <link rel="stylesheet" href="resources/default/1_0/css/menu.css" />
     </head>
     <body>
-        <h1>Thank you for your order, ${name}!</h1>
+        <h1>Thank you for your order ${name}!</h1>
         <p>You placed the following order on <span class="timestamp">${date} at ${time}</span>:</p>
 
-        <ul>
-            <li><span class="itemLabel">Entree:</span><span class="menuItem">${entree}</span></li>
-            <li><span class="itemLabel">Side</span><span class="menuItem">${side}</span></li>
-            <li><span class="itemLabel">Beverage:</span><span class="menuItem">${beverage}</span></li>
-            <li><span class="itemLabel">Dessert:</span><span class="menuItem">${dessert}</span></li>
-        </ul>
+        <table id="confirmation">
+            <tr>
+                <th>Entrees:</th>
+                <td>
+                    <ul>
+                        <c:if test="${empty entrees}">None</c:if>
+                        <c:forEach items="${entrees}" varStatus="loop">
+                            <li>${entrees[loop.index]}</li>
+                        </c:forEach>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>Sides:</th>
+                <td>
+                    <ul>
+                        <c:if test="${empty sides}">None</c:if>
+                        <c:forEach items="${sides}" varStatus="loop">
+                            <li>${sides[loop.index]}</li>
+                        </c:forEach>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>Beverages:</th>
+                <td>
+                    <ul>
+                        <c:if test="${empty beverages}">None</c:if>
+                        <c:forEach items="${beverages}" varStatus="loop">
+                            <li>${beverages[loop.index]}</li>
+                        </c:forEach>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>Desserts:</th>
+                <td>
+                    <ul>
+                        <c:if test="${empty desserts}">None</c:if>
+                        <c:forEach items="${desserts}" varStatus="loop">
+                            <li>${desserts[loop.index]}</li>
+                        </c:forEach>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>Order Total:</th>
+                <td>
+                    <fmt:formatNumber value="${orderTotal}" type="currency" />
+                </td>
+            </tr>
+        </table>
 
-        <a href="${requestContextPath}/Menu">Return Home</a>
+        <p><a href="${requestContextPath}/Menu">Return Home</a></p>
 
     </body>
 </html>

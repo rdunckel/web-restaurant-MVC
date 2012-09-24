@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class MenuDaoMySql implements MenuDao {
 
     private Connection conn;
+    private static final Logger logger = Logger.getLogger(MenuDaoMySql.class.getName());
 
     public static void main(String[] args) {
 
@@ -92,20 +93,7 @@ public class MenuDaoMySql implements MenuDao {
         List<MenuItem> items = new ArrayList<MenuItem>();
         MenuItem item = null;
 
-        InputStream inStream = null;
-        Properties dbProps = new Properties();
-        try {
-            inStream = MenuDaoMySql.class.getResourceAsStream("db.properties");
-            dbProps.load(inStream);
-        } catch (IOException ex) {
-            Logger.getLogger(MenuDaoMySql.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                inStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(MenuDaoMySql.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        Properties dbProps = getDbProps();
 
         String driverClassName = dbProps.getProperty("DRIVER_CLASS_NAME");
         String url = dbProps.getProperty("URL");
@@ -116,9 +104,9 @@ public class MenuDaoMySql implements MenuDao {
             Class.forName(driverClassName);
             conn = DriverManager.getConnection(url, userName, password);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MenuDaoMySql.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(MenuDaoMySql.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
 
         if (conn == null) {
@@ -144,19 +132,99 @@ public class MenuDaoMySql implements MenuDao {
                 count++;
             }
             if (count == 0) {
-                Logger.getLogger(MenuDaoMySql.class.getName()).log(Level.WARNING, count + " records retrieved from the " + dbTable + " table");
+                logger.log(Level.WARNING, count + " records retrieved from the " + dbTable + " table");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(MenuDaoMySql.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         } finally {
             try {
                 prepStmt.close();
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(MenuDaoMySql.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
             }
         }
 
         return items;
+    }
+
+    private Properties getDbProps() {
+
+        InputStream inStream = null;
+        Properties dbProps = new Properties();
+        try {
+            inStream = MenuDaoMySql.class.getResourceAsStream("db.properties");
+            dbProps.load(inStream);
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                inStream.close();
+            } catch (IOException ex) {
+                logger.log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return dbProps;
+    }
+
+    @Override
+    public double getItemPrice(String itemName) {
+        double price = 0.0;
+
+        Properties dbProps = getDbProps();
+
+        String driverClassName = dbProps.getProperty("DRIVER_CLASS_NAME");
+        String url = dbProps.getProperty("URL");
+        String userName = dbProps.getProperty("USER_NAME");
+        String password = dbProps.getProperty("PASSWORD");
+
+        try {
+            Class.forName(driverClassName);
+            conn = DriverManager.getConnection(url, userName, password);
+        } catch (ClassNotFoundException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
+
+        if (conn == null) {
+            logger.log(Level.SEVERE, "Error establishing connection.");
+            return 0.0;
+        }
+
+        String dbTable = "entree";
+        String sql = "SELECT price FROM " + dbTable + " WHERE name = ?";
+
+        PreparedStatement prepStmt = null;
+        ResultSet rs = null;
+
+        int count = 0;
+
+        try {
+            prepStmt = conn.prepareStatement(sql);
+            prepStmt.setString(1, itemName);
+
+            rs = prepStmt.executeQuery();
+
+            while (rs.next()) {
+                price = rs.getDouble(1);
+                count++;
+            }
+            if (count == 0) {
+                logger.log(Level.WARNING, count + " records retrieved from the " + dbTable + " table");
+            }
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                prepStmt.close();
+                conn.close();
+            } catch (SQLException ex) {
+                logger.log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return price;
     }
 }

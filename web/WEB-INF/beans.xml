@@ -4,7 +4,9 @@
        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
     
     <alternatives>
+        <!--Mock out DAO for testing without a database
         <class>edu.wctc.distributedjava.restaurant.model.MenuDaoMock</class>
+        -->
     </alternatives>
     
 </beans>

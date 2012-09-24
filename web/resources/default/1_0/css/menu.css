@@ -1,0 +1,55 @@
+/* 
+    Document   : menu
+    Created on : Sep 3, 2012, 5:57:29 PM
+    Author     : Tivoli
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    margin: 5%;
+    font-family: sans-serif;
+}
+
+#header {
+    text-align: center;
+    font-size: 120%;
+    color: #6CAD26;
+}
+
+form#order td {
+    padding: 15px;
+}
+
+#confirmation th {
+    text-align: left;
+}
+
+#confirmation td {
+    margin: 0px 15px;
+    padding-left: 50px;
+}
+
+ul {
+    padding-left: 0px;
+}
+
+/*
+.itemLabel {
+    font-weight: bold;
+}
+
+.menuItem {
+    padding: 20px;
+}
+
+body {
+    background-image: url('sparty.jpg');
+    background-repeat: no-repeat;
+}
+*/
+
+.timestamp {
+    font-style: italic;
+}
+
